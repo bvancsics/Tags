@@ -71,7 +71,8 @@ def git_clone(attr):
 def git_apply(attr, user_name, password):
     git_apply_cmd = "git apply --include="+str(attr["include"])+" "+str(attr["clean_patch_folder"])+"/"+str(attr["hash"])+".patch"
     sp.call(git_apply_cmd, shell=True)
-    git_commit_cmd = "git commit -a -m \"Bug-"+str(attr["bugID"])+" test\""
+    sp.call("git add --all", shell=True)
+    git_commit_cmd = "git commit -m \"Bug-"+str(attr["bugID"])+" test\""
     sp.call(git_commit_cmd, shell=True)
     git_tag_cmd = "git tag Bug-"+str(attr["bugID"])+"-test"
     sp.call(git_tag_cmd, shell=True)
@@ -81,7 +82,8 @@ def git_apply(attr, user_name, password):
     sp.call(checkout_cmd, shell=True)
     git_apply_cmd = "git apply --exclude="+str(attr["include"])+" "+str(attr["clean_patch_folder"])+"/"+str(attr["hash"])+".patch"
     sp.call(git_apply_cmd, shell=True)
-    git_commit_cmd = "git commit -a -m \"Bug-"+str(attr["bugID"])+" fix\""
+    sp.call("git add --all", shell=True)
+    git_commit_cmd = "git commit -m \"Bug-"+str(attr["bugID"])+" fix\""
     sp.call(git_commit_cmd, shell=True)
     git_tag_cmd = "git tag Bug-"+str(attr["bugID"])+"-fix"
     sp.call(git_tag_cmd, shell=True)
@@ -91,7 +93,8 @@ def git_apply(attr, user_name, password):
     sp.call(checkout_cmd, shell=True)
     git_apply_cmd = "git apply "+str(attr["clean_patch_folder"])+"/"+str(attr["hash"])+".patch"
     sp.call(git_apply_cmd, shell=True)
-    git_commit_cmd = "git commit -a -m \"Bug-"+str(attr["bugID"])+" full\""
+    sp.call("git add --all", shell=True)
+    git_commit_cmd = "git commit -m \"Bug-"+str(attr["bugID"])+" full\""
     sp.call(git_commit_cmd, shell=True)
     git_tag_cmd = "git tag Bug-"+str(attr["bugID"])+"-full"
     sp.call(git_tag_cmd, shell=True)
